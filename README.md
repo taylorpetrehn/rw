@@ -36,15 +36,15 @@ contact form returns a "not configured" response instead of sending email.
 
 ## Content (Sanity)
 
-1. Create a free project at https://sanity.io, copy the **project ID**, create a **dataset**
-   named `production`, and an **Editor API token**.
-2. Put those in `.env.local` (`NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`,
-   `SANITY_API_TOKEN`).
-3. Seed the current content + upload images:
-   ```bash
-   pnpm --filter @rw/sanity seed
-   ```
-4. Edit content at http://localhost:3000/studio (or `https://rewildingspeech.com/studio` in prod).
+The project is already provisioned: **project `pg56vxh6`**, dataset **`production`**, and it's
+**seeded** with the current content + photos.
+
+- For local dev against it, put `NEXT_PUBLIC_SANITY_PROJECT_ID=pg56vxh6` and
+  `NEXT_PUBLIC_SANITY_DATASET=production` in `.env.local` (see `.env.example`). Reads are
+  public — no token needed to render.
+- Edit content at http://localhost:3000/studio (or `https://rewildingspeech.com/studio` in prod).
+- Re-seed only if you reset the dataset: add an Editor `SANITY_API_TOKEN` to `.env.local`, then
+  `pnpm --filter @rw/sanity seed`.
 
 ## Deploy
 
