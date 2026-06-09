@@ -131,7 +131,7 @@ async function main() {
   };
 
   const privacyDoc = {
-    _id: "legal.privacy",
+    _id: "legalPrivacy",
     _type: "legalPage",
     title: privacyContent.title,
     slug: { _type: "slug", current: "privacy" },
@@ -140,7 +140,7 @@ async function main() {
   };
 
   const termsDoc = {
-    _id: "legal.terms",
+    _id: "legalTerms",
     _type: "legalPage",
     title: termsContent.title,
     slug: { _type: "slug", current: "terms" },
