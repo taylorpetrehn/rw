@@ -1,0 +1,30 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalEnv": [
+    "NEXT_PUBLIC_SANITY_PROJECT_ID",
+    "NEXT_PUBLIC_SANITY_DATASET",
+    "NEXT_PUBLIC_SANITY_API_VERSION",
+    "NEXT_PUBLIC_SITE_URL",
+    "SANITY_API_TOKEN",
+    "RESEND_API_KEY",
+    "CONTACT_TO_EMAIL",
+    "CONTACT_FROM_EMAIL"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "lint": {},
+    "typecheck": {
+      "dependsOn": ["^build"]
+    },
+    "seed": {
+      "cache": false
+    }
+  }
+}

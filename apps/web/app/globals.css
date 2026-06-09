@@ -1,0 +1,173 @@
+@import "tailwindcss";
+
+/* ----------------------------------------------------------------------------
+   Theme — ported verbatim from the Rails app (app/assets/stylesheets/application.css)
+   Fonts:
+     Birdie  -> self-hosted via next/font/local (--font-birdie), used for display/serif/body
+     degular -> Adobe Typekit (kit otn8yfj), loaded in app/layout.tsx, used for sans
+---------------------------------------------------------------------------- */
+@theme {
+  /* Custom Font Families */
+  --font-display: var(--font-birdie), Georgia, serif;
+  --font-body: var(--font-birdie), Georgia, serif;
+  --font-serif: var(--font-birdie), Georgia, serif;
+  --font-sans: "degular-variable", Inter, system-ui, -apple-system, sans-serif;
+
+  /* Primary color palette - Forest greens */
+  --color-primary: #2e4b3c;
+  --color-primary-light: #4a8070;
+  --color-primary-lighter: #6a9d8f;
+  --color-primary-dark: #09332c;
+  --color-primary-darker: #051f1a;
+
+  /* Secondary color palette - Warm oranges */
+  --color-secondary: #f0531c;
+  --color-secondary-light: #ffa74f;
+  --color-secondary-lighter: #ffd4a3;
+  --color-secondary-dark: #c43d0f;
+
+  /* Neutral colors - Warm tones */
+  --color-soft-gray: #f7f7f7;
+  --color-warm-white: #fefefe;
+  --color-pure-white: #ffffff;
+  --color-warm-gray: #f7edda;
+  --color-warm-gray-light: #faf5eb;
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f7edda;
+  --color-neutral-200: #f0e4c9;
+  --color-neutral-300: #e6d8b8;
+  --color-neutral-600: #525252;
+  --color-neutral-700: #404040;
+  --color-neutral-800: #262626;
+  --color-neutral-900: #171717;
+
+  /* Accent colors */
+  --color-accent-green: #10b981;
+  --color-accent-orange: #f97316;
+  --color-accent-blue: #e0f2f1;
+  --color-green-primary: #2e4b3c;
+
+  /* Custom spacing */
+  --spacing-18: 4.5rem;
+  --spacing-72: 18rem;
+  --spacing-84: 21rem;
+  --spacing-96: 24rem;
+
+  /* Custom border radius */
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+  --radius-4xl: 2rem;
+  --radius-5xl: 3rem;
+
+  /* Custom shadows */
+  --shadow-soft: 0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04);
+  --shadow-soft-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+  --shadow-inner-soft: inset 0 2px 4px 0 rgba(0, 0, 0, 0.03);
+}
+
+/* ----------------------------------------------------------------------------
+   Flip Card Effect for Approach Cards (ported from Rails)
+---------------------------------------------------------------------------- */
+.flip-card {
+  perspective: 1000px;
+  min-height: 450px;
+  height: 100%;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 450px;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+/* Desktop hover behavior */
+@media (hover: hover) and (pointer: fine) {
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+/* Mobile/touch behavior - triggered by JavaScript via the `flipped` class */
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 1.5rem;
+}
+
+.flip-card-front {
+  background-color: var(--color-warm-gray);
+}
+
+.flip-card-back {
+  background-color: var(--color-warm-gray);
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.flip-card-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Close button on back of card for mobile */
+@media (hover: none) and (pointer: coarse) {
+  .flip-card-back-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.2s;
+    border: none;
+  }
+
+  .flip-card-back-close:active {
+    background-color: rgba(255, 255, 255, 1);
+  }
+
+  .flip-card-back-close svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #2e4b3c;
+  }
+}
+
+/* Hide close button on desktop (hover devices) */
+@media (hover: hover) and (pointer: fine) {
+  .flip-card-back-close {
+    display: none;
+  }
+}
+
+/* Reduce motion for accessibility - disable flip */
+@media (prefers-reduced-motion: reduce) {
+  .flip-card-inner {
+    transition: none !important;
+  }
+  .flip-card:hover .flip-card-inner {
+    transform: none !important;
+  }
+}
