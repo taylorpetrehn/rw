@@ -294,7 +294,7 @@ export default function ContactForm() {
             <button
               type="submit"
               disabled={pending || (Boolean(TURNSTILE_SITE_KEY) && !turnstileToken)}
-              className="w-full py-3 px-8 text-sm bg-secondary text-white hover:bg-secondary-light rounded-lg transition-colors duration-200 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+              className="w-full py-3 px-8 text-sm bg-secondary text-white hover:bg-secondary-dark rounded-lg transition-colors duration-200 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {pending ? "Sending..." : "Send Message"}
             </button>

@@ -42,17 +42,21 @@ else typed fallback content. Pages map fields → JSX; **page structure/classes*
 
 ## Theme & fonts (`app/globals.css`, `app/fonts.ts`)
 
-- Tailwind v4 `@theme` — colors/fonts ported 1:1 from the Rails app. Primary `#2E4B3C`
-  (forest), secondary `#F0531C` (orange), `warm-gray` `#F7EDDA` (cream bg).
-- **Fluid type scale** — headings use semantic tokens (`text-display-xl/lg/md/sm/xs`,
-  `text-brand`, `text-lead`, `text-lead-lg`) defined in `@theme`; each clamp()s between a
-  390px and 1280px viewport and carries its own line-height/weight/tracking. Don't re-derive
-  per-breakpoint stacks (`text-3xl sm:text-4xl …`) — use (or extend) the scale. The small
-  uppercase label voice is the `eyebrow` utility (pair it with `font-light`/`font-medium`).
-- Birdie ships a **single weight (400)** — `font-light`/`font-medium` on serif/display text
-  is a silent no-op (browsers don't synthesize sub-bold weights). Weight is pinned in the
-  display tokens; don't add weight classes to Birdie text.
-- Base layer sets `text-wrap: balance` on h1–h4 and `text-wrap: pretty` on body copy.
+- Tailwind v4 `@theme` — colors/fonts ported from the Rails app, contrast-audited and pruned.
+  Primary `#2E4B3C` (forest), secondary `#F0531C` (orange), `warm-gray` `#F7EDDA` (cream bg).
+  **Orange rules:** `secondary` for fills/large display accents only (3.5:1 with white — large-text
+  territory); `secondary-dark` for hover/pressed fills (5.2:1); `secondary-ink` for small orange
+  text on light surfaces (5.8:1 on white). The neutral ramp is warm end-to-end (400/500 are warm
+  stone grays, not Tailwind's cool defaults). Don't add palette tokens that aren't used.
+- **Fluid type scale** — headings use semantic tokens (`text-display-xl/lg/md/sm/xs`, `text-brand`,
+  `text-lead`, `text-lead-lg`); each clamp()s between a 390px and 1280px viewport. Don't re-derive
+  per-breakpoint stacks — use (or extend) the scale. The small uppercase label voice is the
+  `eyebrow` utility (pair with `font-light`/`font-medium`).
+- Birdie ships a **single weight (400)** — weight is pinned in display tokens; don't add weight
+  classes to Birdie text.
+- Base layer: `text-wrap: balance` on h1–h4, `text-wrap: pretty` on body copy. Interaction states
+  in one `@layer base` block: global `:focus-visible` forest ring, brand `::selection`,
+  `accent-color`, tap-highlight reset. Don't add `focus:outline-none` without replacing the affordance.
 - `Birdie` = self-hosted display/serif/body via `next/font/local` (`app/fonts/`).
 - `degular-variable` = sans, via Adobe Typekit kit `otn8yfj` (`<link>` in `layout.tsx`). The
   kit is domain-allowlisted (works on rewildingspeech.com; may fall back on random domains).

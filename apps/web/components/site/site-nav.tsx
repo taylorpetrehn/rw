@@ -83,7 +83,7 @@ export function SiteNav({ settings }: SiteNavProps) {
           <div className="hidden md:flex items-center space-x-10">
             <Link
               href={settings.primaryCta.href}
-              className="bg-secondary text-pure-white px-7 py-3 rounded-full hover:bg-secondary-light transition-all duration-300 text-sm font-medium tracking-wider shadow-sm hover:shadow-md hover:scale-105"
+              className="bg-secondary text-pure-white px-7 py-3 rounded-full hover:bg-secondary-dark transition-all duration-300 text-sm font-medium tracking-wider shadow-sm hover:shadow-md hover:scale-105"
             >
               {settings.primaryCta.label}
             </Link>
@@ -95,8 +95,9 @@ export function SiteNav({ settings }: SiteNavProps) {
               ref={buttonRef}
               type="button"
               onClick={() => setMenuOpen((open) => !open)}
-              className="text-neutral-700 hover:text-primary focus:outline-none focus:text-primary transition-colors duration-300"
+              className="text-neutral-700 hover:text-primary transition-colors duration-300"
               aria-expanded={menuOpen}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
             >
               <svg
                 className="h-6 w-6"
@@ -129,7 +130,7 @@ export function SiteNav({ settings }: SiteNavProps) {
           <div className="border-t border-neutral-200 pt-4 space-y-3">
             <Link
               href={settings.primaryCta.href}
-              className="block bg-secondary text-pure-white px-6 py-3 rounded-full hover:bg-secondary-light text-center text-sm font-medium tracking-wider transition-all duration-300 shadow-sm hover:shadow-md"
+              className="block bg-secondary text-pure-white px-6 py-3 rounded-full hover:bg-secondary-dark text-center text-sm font-medium tracking-wider transition-all duration-300 shadow-sm hover:shadow-md"
             >
               {settings.primaryCta.label}
             </Link>

@@ -8,6 +8,8 @@ import { CheckIcon } from "@/components/ui/check-icon";
 type BulletAccent = "primary" | "secondary";
 
 function buildComponents(bulletAccent: BulletAccent): PortableTextComponents {
+  // Icons are decorative, so the brand orange (`secondary`) is fine here —
+  // small TEXT in orange must use `secondary-ink` instead (see globals.css).
   const iconColor =
     bulletAccent === "secondary" ? "text-secondary" : "text-primary";
 
