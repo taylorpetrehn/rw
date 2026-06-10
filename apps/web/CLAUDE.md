@@ -31,9 +31,14 @@ else typed fallback content. Pages map fields → JSX; **page structure/classes*
   content-sized flex/inline parent collapses to 0×0 (this silently broke the hero arched
   portrait — fixed by adding `w-full` so the container gets a width). Prefer giving the
   container a real width (grid cell or `w-full`) and always pass `sizes`.
-- `ui/reveal.tsx` (client) — scroll-reveal (IntersectionObserver). Pass the element's initial
-  hidden classes (`opacity-0 translate-y-8 …`) as `className`; it animates to visible.
-- `ui/flip-card.tsx` (client) — approach cards (hover desktop / tap mobile).
+- `ui/reveal.tsx` (client) — scroll-reveal (IntersectionObserver). The hidden state lives in
+  CSS via `[data-reveal]` (globals.css) — pass only layout/visual classes in `className`,
+  never `opacity-0`/`translate-*`. Choreography: `delay={ms}` staggers siblings; override the
+  entry direction with `--reveal-from` (e.g. `md:[--reveal-from:translateX(-2rem)]`). After
+  revealing, the element drops its transition ("done" state) so utility transitions (hover
+  lifts) work normally. No-JS: a `<noscript>` rule in `layout.tsx` forces content visible.
+- `ui/flip-card.tsx` (client) — approach cards (hover desktop / tap mobile / Enter+Space
+  keyboard, with `aria-pressed`).
 - `ui/portable-text.tsx` — `<RichTextRenderer value bulletAccent>` renders Portable Text;
   bullets use `<CheckIcon>` markers (Tailwind preflight strips default list markers).
 - `site/site-nav.tsx` (client), `site/site-footer.tsx` — shared chrome (in the layout).
@@ -63,6 +68,10 @@ else typed fallback content. Pages map fields → JSX; **page structure/classes*
 - NOTE: the old Rails build never generated `text-pure-white` (it rendered black). Here the
   theme is correct so `text-pure-white` = white — buttons use it intentionally. The "Our Goal"
   card uses `text-neutral-900` (it was white-on-white in the ERB).
+- **Motion** — one easing voice (`--ease-out-soft`) + reveal tempo (`--duration-reveal`) live
+  in `@theme`; the reveal state machine (`[data-reveal]` hidden→visible→done) and smooth-scroll
+  / `scroll-padding-top` (fixed-nav anchor offset) are in `globals.css`. All motion respects
+  `prefers-reduced-motion`; hover lifts use `motion-safe:`.
 
 ## Contact form (better than the old Rails one)
 

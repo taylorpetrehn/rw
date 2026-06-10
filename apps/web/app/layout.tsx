@@ -61,6 +61,10 @@ export default async function RootLayout({
       <head>
         {/* Adobe Typekit — degular-variable (sans). Kit is domain-allowlisted. */}
         <link rel="stylesheet" href="https://use.typekit.net/otn8yfj.css" />
+        {/* Scroll-reveal content must not stay hidden when JS is off. */}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1 !important;transform:none !important;}`}</style>
+        </noscript>
       </head>
       <body className="bg-warm-gray font-body text-neutral-900 antialiased">
         <SiteNav settings={settings} />
