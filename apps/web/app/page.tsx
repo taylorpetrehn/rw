@@ -37,7 +37,7 @@ export default async function HomePage() {
           <div className="flex flex-col md:grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 lg:gap-16 md:items-center max-w-7xl mx-auto">
             {/* Left: Content */}
             <div className="space-y-6 sm:space-y-8 max-w-xl mx-auto md:mx-0 text-center md:text-left">
-              <Reveal className="opacity-0 translate-y-8">
+              <Reveal>
                 <h1 className="text-display-xl font-serif text-primary mb-4 sm:mb-6">
                   {home.hero.headingLine1}
                   <br />
@@ -48,9 +48,9 @@ export default async function HomePage() {
                 </p>
               </Reveal>
 
-              <Reveal className="w-12 sm:w-16 h-px bg-primary/20 opacity-0 translate-y-8 mx-auto md:mx-0" />
+              <Reveal className="w-12 sm:w-16 h-px bg-primary/20 mx-auto md:mx-0" delay={100} />
 
-              <Reveal className="opacity-0 translate-y-8">
+              <Reveal delay={150}>
                 <p className="text-lead text-neutral-700 font-light mb-6 sm:mb-8">
                   {home.hero.lead}
                 </p>
@@ -59,7 +59,7 @@ export default async function HomePage() {
                 </p>
               </Reveal>
 
-              <Reveal className="opacity-0 translate-y-8">
+              <Reveal delay={250}>
                 <Link
                   href="/contact"
                   className="inline-flex items-center bg-secondary text-pure-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium text-xs sm:text-sm tracking-wider hover:bg-secondary-dark transition-all duration-300 shadow-lg hover:shadow-xl"
@@ -71,7 +71,10 @@ export default async function HomePage() {
 
             {/* Right: Kailey's Portrait in Arched Frame */}
             <div className="relative flex items-center justify-center">
-              <Reveal className="relative w-full max-w-xs sm:max-w-md mx-auto opacity-0 translate-y-8 md:-translate-x-8 md:translate-y-0">
+              <Reveal
+                className="relative w-full max-w-xs sm:max-w-md mx-auto md:[--reveal-from:translateX(-2rem)]"
+                delay={200}
+              >
                 {/* Arched Portrait Container */}
                 <div className="relative aspect-[3/6] rounded-t-full rounded-b-3xl overflow-hidden shadow-2xl bg-pure-white">
                   <SanityImage
@@ -96,12 +99,12 @@ export default async function HomePage() {
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20">
           {/* Section Header */}
           <div className="text-center mb-12 sm:mb-16 md:mb-20 lg:mb-24 max-w-4xl mx-auto">
-            <Reveal className="opacity-0 translate-y-8">
+            <Reveal>
               <h2 className="text-display-lg font-serif text-neutral-900 mb-4 sm:mb-6 md:mb-8">
                 {home.approach.heading}
               </h2>
             </Reveal>
-            <Reveal className="opacity-0 translate-y-8">
+            <Reveal delay={100}>
               <p className="text-lead-lg text-neutral-600 font-light mb-4 sm:mb-6 md:mb-8">
                 {home.approach.intro}
               </p>
@@ -116,10 +119,11 @@ export default async function HomePage() {
                 return (
                   <Reveal
                     key={card.title}
-                    className="block opacity-0 translate-y-8 md:col-span-2 lg:col-span-1 group"
+                    className="block md:col-span-2 lg:col-span-1 group"
+                    delay={index * 100}
                   >
                     <Link href={card.href} className="block h-full group">
-                      <div className="bg-pure-white rounded-2xl sm:rounded-3xl shadow-lg group-hover:shadow-xl transition-all duration-500 p-6 sm:p-8 h-full">
+                      <div className="bg-pure-white rounded-2xl sm:rounded-3xl shadow-lg group-hover:shadow-xl motion-safe:group-hover:-translate-y-1 transition-all duration-500 p-6 sm:p-8 h-full">
                         <div className="space-y-4 sm:space-y-5">
                           <div className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-secondary/20 rounded-full">
                             <span className="eyebrow font-medium text-secondary-ink">
@@ -170,7 +174,8 @@ export default async function HomePage() {
               return (
                 <Reveal
                   key={card.title}
-                  className={`opacity-0 translate-y-8${index === 0 ? " md:col-span-2 lg:col-span-1" : ""}`}
+                  className={index === 0 ? "md:col-span-2 lg:col-span-1" : undefined}
+                  delay={index * 100}
                 >
                   <FlipCard
                     className={index === 0 ? "md:col-span-2 lg:col-span-1" : ""}
@@ -221,12 +226,12 @@ export default async function HomePage() {
           <div className="max-w-6xl mx-auto">
             {/* Section Header */}
             <div className="text-center mb-12 sm:mb-16 md:mb-20">
-              <Reveal className="opacity-0 translate-y-8">
+              <Reveal>
                 <h2 className="text-display-lg font-serif text-neutral-900 mb-6 sm:mb-8">
                   {home.philosophy.heading}
                 </h2>
               </Reveal>
-              <Reveal className="opacity-0 translate-y-8">
+              <Reveal delay={100}>
                 <p className="text-lead text-neutral-600 font-sans font-light max-w-3xl mx-auto">
                   {home.philosophy.intro}
                 </p>
@@ -236,7 +241,7 @@ export default async function HomePage() {
             {/* Masonry-style Grid */}
             <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {/* Large Feature Card */}
-              <Reveal className="md:col-span-2 lg:row-span-2 bg-pure-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 lg:p-12 shadow-lg hover:shadow-xl transition-all duration-500 opacity-0 translate-y-8">
+              <Reveal className="md:col-span-2 lg:row-span-2 bg-pure-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 lg:p-12 shadow-lg hover:shadow-xl motion-safe:hover:-translate-y-1 transition-all duration-500">
                 <div className="space-y-4 sm:space-y-6">
                   <div className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-primary/10 rounded-full">
                     <span className="eyebrow font-medium text-primary">
@@ -270,7 +275,8 @@ export default async function HomePage() {
               {home.philosophy.smallCards.map((smallCard, i) => (
                 <Reveal
                   key={smallCard.title}
-                  className="bg-pure-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-500 opacity-0 translate-y-8"
+                  className="bg-pure-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-lg hover:shadow-xl motion-safe:hover:-translate-y-1 transition-all duration-500"
+                  delay={(i + 1) * 100}
                 >
                   <h3 className="text-lg sm:text-xl font-serif text-neutral-900 mb-3 sm:mb-4">
                     {smallCard.title}
@@ -288,7 +294,10 @@ export default async function HomePage() {
               ))}
 
               {/* Goal Statement - Spans 2 columns */}
-              <Reveal className="md:col-span-2 bg-pure-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 text-neutral-900 shadow-lg hover:shadow-xl transition-all duration-500 opacity-0 translate-y-8">
+              <Reveal
+                className="md:col-span-2 bg-pure-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 text-neutral-900 shadow-lg hover:shadow-xl motion-safe:hover:-translate-y-1 transition-all duration-500"
+                delay={100}
+              >
                 <h3 className="text-display-xs font-serif mb-3 sm:mb-4">
                   {home.philosophy.goalTitle}
                 </h3>
@@ -306,7 +315,7 @@ export default async function HomePage() {
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20">
           {/* Section Header */}
           <div className="text-center mb-10 sm:mb-12 md:mb-16 lg:mb-20 max-w-4xl mx-auto">
-            <Reveal className="opacity-0 translate-y-8">
+            <Reveal>
               <h2 className="text-display-lg font-serif text-neutral-900 mb-5 sm:mb-6 md:mb-8">
                 {home.team.heading}
               </h2>
@@ -319,7 +328,7 @@ export default async function HomePage() {
               {/* Left Column: Photo + Quotes */}
               <div className="md:col-span-5 lg:col-span-5 space-y-6 sm:space-y-8 md:space-y-10 mx-auto md:mx-0 w-full max-w-xs sm:max-w-sm md:max-w-none">
                 {/* Large Portrait Photo */}
-                <Reveal className="relative opacity-0 translate-y-8 md:translate-x-8 md:translate-y-0">
+                <Reveal className="relative md:[--reveal-from:translateX(2rem)]">
                   <div className="relative aspect-[3/4] md:aspect-[4/5] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl">
                     <SanityImage
                       image={home.team.portrait}
@@ -333,7 +342,7 @@ export default async function HomePage() {
                 </Reveal>
 
                 {/* Kailey's Philosophy Quote */}
-                <Reveal className="opacity-0 translate-y-8 md:translate-x-8 md:translate-y-0 flex justify-center">
+                <Reveal className="flex justify-center md:[--reveal-from:translateX(2rem)]" delay={100}>
                   <p className="text-sm sm:text-base text-neutral-700 font-serif font-light italic leading-relaxed text-center max-w-[90%]">
                     {home.team.quote}
                   </p>
@@ -341,7 +350,10 @@ export default async function HomePage() {
               </div>
 
               {/* Bio Content with Overlap */}
-              <Reveal className="md:col-span-7 lg:col-span-7 space-y-4 sm:space-y-5 md:space-y-6 opacity-0 translate-y-8 md:-translate-x-8 md:translate-y-0 text-center md:text-left md:pl-8 lg:pl-12 xl:pl-16 self-start md:self-center">
+              <Reveal
+                className="md:col-span-7 lg:col-span-7 space-y-4 sm:space-y-5 md:space-y-6 text-center md:text-left md:pl-8 lg:pl-12 xl:pl-16 self-start md:self-center md:[--reveal-from:translateX(-2rem)]"
+                delay={150}
+              >
                 {/* Name & Title */}
                 <div className="space-y-1.5 sm:space-y-2 md:space-y-3">
                   <h3 className="text-display-md font-serif text-neutral-900">
@@ -426,7 +438,7 @@ export default async function HomePage() {
               {home.faq.items.map((item, index) => (
                 <div
                   key={item.question}
-                  className={`bg-pure-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-500${
+                  className={`bg-pure-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-lg hover:shadow-xl motion-safe:hover:-translate-y-1 transition-all duration-500${
                     index === 2 ? " md:col-span-2 lg:col-span-1" : ""
                   }`}
                 >

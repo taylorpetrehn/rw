@@ -4,41 +4,23 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import type { SiteSettings } from "@rw/sanity";
 
-const SCROLLED_CLASSES = [
-  "bg-warm-gray/95",
-  "backdrop-blur-md",
-  "shadow-sm",
-  "border-b",
-  "border-neutral-200/30",
-];
-
 interface SiteNavProps {
   settings: SiteSettings;
 }
 
 export function SiteNav({ settings }: SiteNavProps) {
-  const navRef = useRef<HTMLElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  // Navbar scroll background behavior (navbar_controller.js)
+  // Navbar scroll background behavior (navbar_controller.js). State only
+  // flips when crossing the threshold, so scrolling doesn't re-render.
   useEffect(() => {
-    const nav = navRef.current;
-    if (!nav) return;
+    const handleScroll = () => setScrolled(window.scrollY > 50);
 
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        nav.classList.add(...SCROLLED_CLASSES);
-        nav.classList.remove("bg-transparent");
-      } else {
-        nav.classList.remove(...SCROLLED_CLASSES);
-        nav.classList.add("bg-transparent");
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
     handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -65,8 +47,11 @@ export function SiteNav({ settings }: SiteNavProps) {
 
   return (
     <nav
-      ref={navRef}
-      className="fixed top-0 w-full transition-all duration-500 ease-out z-50 bg-transparent"
+      className={`fixed top-0 w-full transition-all duration-500 ease-out z-50 ${
+        scrolled
+          ? "bg-warm-gray/95 backdrop-blur-md shadow-sm border-b border-neutral-200/30"
+          : "bg-transparent"
+      }`}
     >
       <div className="container mx-auto px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:py-8">
         <div className="flex items-center justify-between">
