@@ -15,10 +15,10 @@ export function SiteFooter({ settings }: SiteFooterProps) {
         <div className="max-w-2xl mx-auto text-center space-y-5 sm:space-y-6">
           {/* Brand */}
           <div className="space-y-1.5 sm:space-y-2">
-            <h3 className="text-3xl sm:text-4xl font-serif font-light text-primary tracking-wide">
+            <h3 className="text-brand font-serif text-primary">
               {settings.brandName}
             </h3>
-            <p className="text-xs font-sans font-light text-neutral-600 tracking-widest uppercase">
+            <p className="eyebrow font-light text-neutral-600">
               {settings.brandSubtitle}
             </p>
           </div>

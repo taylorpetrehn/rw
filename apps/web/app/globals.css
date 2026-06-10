@@ -63,6 +63,81 @@
   --shadow-soft: 0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04);
   --shadow-soft-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
   --shadow-inner-soft: inset 0 2px 4px 0 rgba(0, 0, 0, 0.03);
+
+  /* --------------------------------------------------------------------------
+     Fluid type scale — the display voices used across the site.
+
+     Each token pairs a clamp()ed size with its line-height / weight / tracking,
+     so a heading is one utility (`text-display-lg`) instead of a per-breakpoint
+     stack (`text-3xl sm:text-4xl md:text-5xl lg:text-7xl`). Sizes interpolate
+     linearly between a 390px and a 1280px viewport, anchored to the same
+     endpoints the old breakpoint stacks used — the scale is the source of
+     truth; tune it here and every page follows.
+
+     Weight is pinned to 400 because Birdie ships a single weight: `font-light`
+     and `font-medium` on serif text never rendered (browsers don't synthesize
+     sub-bold weights), so the weight lives in the token instead of dead classes.
+  -------------------------------------------------------------------------- */
+  --text-display-xl: clamp(2.25rem, 1.26rem + 4.04vw, 4.5rem); /* h1 · 36→72px */
+  --text-display-xl--line-height: 1.2;
+  --text-display-xl--font-weight: 400;
+  --text-display-xl--letter-spacing: 0.025em;
+
+  --text-display-lg: clamp(1.875rem, 0.72rem + 4.72vw, 4.5rem); /* section h2 · 30→72px */
+  --text-display-lg--line-height: 1.1;
+  --text-display-lg--font-weight: 400;
+  --text-display-lg--letter-spacing: 0.025em;
+
+  --text-display-md: clamp(1.5rem, 0.84rem + 2.7vw, 3rem); /* feature names · 24→48px */
+  --text-display-md--line-height: 1.2;
+  --text-display-md--font-weight: 400;
+
+  --text-display-sm: clamp(1.5rem, 1.17rem + 1.35vw, 2.25rem); /* subsection h2/h3 · 24→36px */
+  --text-display-sm--line-height: 1.25;
+  --text-display-sm--font-weight: 400;
+
+  --text-display-xs: clamp(1.5rem, 1.34rem + 0.67vw, 1.875rem); /* card h3 · 24→30px */
+  --text-display-xs--line-height: 1.25;
+  --text-display-xs--font-weight: 400;
+
+  --text-brand: clamp(1.875rem, 1.71rem + 0.67vw, 2.25rem); /* nav/footer wordmark · 30→36px */
+  --text-brand--line-height: 1.2;
+  --text-brand--font-weight: 400;
+  --text-brand--letter-spacing: 0.025em;
+
+  --text-lead: clamp(1rem, 0.89rem + 0.45vw, 1.25rem); /* lead paragraph · 16→20px */
+  --text-lead--line-height: 1.625;
+
+  --text-lead-lg: clamp(1.125rem, 0.96rem + 0.67vw, 1.5rem); /* section intro · 18→24px */
+  --text-lead-lg--line-height: 1.625;
+}
+
+/* ----------------------------------------------------------------------------
+   Typographic base — the quiet details applied everywhere
+---------------------------------------------------------------------------- */
+@layer base {
+  body {
+    font-kerning: normal;
+    font-variant-ligatures: common-ligatures contextual;
+  }
+
+  /* Balance short runs of display text; tidy rag + orphans in body copy. */
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+  }
+  p, li, blockquote, figcaption {
+    text-wrap: pretty;
+  }
+}
+
+/* The small uppercase label voice (badges, section labels, credentials).
+   One size + tracking everywhere; weight stays per-use (font-light/font-medium)
+   since the sans (degular-variable) is a true variable font. */
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: clamp(0.75rem, 0.72rem + 0.11vw, 0.8125rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 /* ----------------------------------------------------------------------------

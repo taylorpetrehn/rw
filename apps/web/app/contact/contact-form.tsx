@@ -107,7 +107,7 @@ export default function ContactForm() {
               />
             </svg>
           </div>
-          <h2 className="mt-8 text-4xl md:text-5xl font-display font-light tracking-tight text-primary">
+          <h2 className="mt-8 text-4xl md:text-5xl font-display tracking-tight text-primary">
             Thank You
           </h2>
         </div>
@@ -141,7 +141,7 @@ export default function ContactForm() {
             />
           </svg>
         </div>
-        <h2 className="mt-8 text-4xl md:text-5xl font-display font-light tracking-tight text-primary">
+        <h2 className="mt-8 text-4xl md:text-5xl font-display tracking-tight text-primary">
           Get in Touch
         </h2>
         <p className="mt-4 text-lg text-neutral-600 font-light leading-relaxed">
