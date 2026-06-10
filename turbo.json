@@ -8,7 +8,9 @@
     "SANITY_API_TOKEN",
     "RESEND_API_KEY",
     "CONTACT_TO_EMAIL",
-    "CONTACT_FROM_EMAIL"
+    "CONTACT_FROM_EMAIL",
+    "NEXT_PUBLIC_TURNSTILE_SITE_KEY",
+    "TURNSTILE_SECRET_KEY"
   ],
   "tasks": {
     "build": {

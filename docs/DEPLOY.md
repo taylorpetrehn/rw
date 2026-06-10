@@ -30,15 +30,25 @@ Then **Settings → Git** → **Connect Git Repository** → `taylorpetrehn/rw`
 That's the whole reason a CLI deploy couldn't finish: Root Directory is a project setting
 that can only be changed in the dashboard or via the Vercel API.
 
-## 2. Optional — contact-form email (Resend)
+## 2. Contact form — Resend + Turnstile (both required in production)
 
-Until configured, the contact form returns a graceful "Email not configured" message (no
-crash). To enable:
-1. resend.com → add + verify `rewildingspeech.com` → create an API key.
-2. Vercel → Settings → Environment Variables (**Production**), add:
-   - `RESEND_API_KEY` = your key
-   - `CONTACT_TO_EMAIL` = where submissions go, e.g. `hello@rewildingspeech.com`
-   - `CONTACT_FROM_EMAIL` = `Rewilding Speech <noreply@rewildingspeech.com>`
+The contact form is hardened against bots (the old site got heavy spam). In **production it
+needs BOTH** an email provider (Resend) **and** Cloudflare Turnstile configured — until then
+it returns a graceful 503 (no crash, nothing is sent). Add all of these in
+Vercel → Settings → Environment Variables (**Production**):
+
+**Email (Resend):**
+1. resend.com → add + verify `rewildingspeech.com` (your DNS is already set up for it) → API key.
+2. `RESEND_API_KEY` = your key · `CONTACT_TO_EMAIL` = e.g. `hello@rewildingspeech.com` ·
+   `CONTACT_FROM_EMAIL` = `Rewilding Speech <noreply@rewildingspeech.com>`
+
+**Bot protection (Cloudflare Turnstile — required in prod):**
+3. Cloudflare dashboard → Turnstile → add a widget for `rewildingspeech.com` → copy the keys.
+4. `NEXT_PUBLIC_TURNSTILE_SITE_KEY` = site key · `TURNSTILE_SECRET_KEY` = secret key.
+
+Redeploy after adding. The form also has a per-IP rate limit and fail-closed honeypot/time-trap
+that work with no config. For details + optional hardening (CSP, Upstash rate limiting,
+dependency `pnpm audit` cleanup), see `docs/SECURITY.md`.
 
 ## 3. Optional — Preview env
 

@@ -19,8 +19,5 @@ export const dataset =
 export const apiVersion =
   process.env.NEXT_PUBLIC_SANITY_API_VERSION ?? "2024-10-01";
 
-/** A write token, used only by the seed script (never exposed to the client). */
-export const token = process.env.SANITY_API_TOKEN ?? "";
-
 /** True when a real Sanity project is wired up. */
 export const isSanityConfigured = projectId.trim().length > 0;

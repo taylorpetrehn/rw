@@ -1,7 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { contactSchema, type ContactInput } from "@/lib/contact";
+import { Turnstile } from "@/components/ui/turnstile";
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 type FieldErrors = Partial<Record<keyof ContactInput, string>>;
 
@@ -21,6 +24,9 @@ export default function ContactForm() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  // Time-trap: when the form was rendered (bots typically submit instantly).
+  const mountedAt = useRef(Date.now());
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -54,7 +60,11 @@ export default function ContactForm() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(result.data),
+        body: JSON.stringify({
+          ...result.data,
+          elapsedMs: Date.now() - mountedAt.current,
+          turnstileToken: turnstileToken || undefined,
+        }),
       });
 
       const data = await response.json().catch(() => null);
@@ -82,7 +92,7 @@ export default function ContactForm() {
       <div className="max-w-lg w-full">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="mx-auto h-16 w-16 flex items-center justify-center rounded-2xl bg-accent-green shadow-soft">
+          <div className="mx-auto h-16 w-16 flex items-center justify-center rounded-2xl bg-primary/10 shadow-soft">
             <svg
               className="h-8 w-8 text-primary"
               fill="none"
@@ -116,7 +126,7 @@ export default function ContactForm() {
     <div className="max-w-lg w-full">
       {/* Header */}
       <div className="text-center mb-12">
-        <div className="mx-auto h-16 w-16 flex items-center justify-center rounded-2xl bg-accent-green shadow-soft">
+        <div className="mx-auto h-16 w-16 flex items-center justify-center rounded-2xl bg-primary/10 shadow-soft">
           <svg
             className="h-8 w-8 text-primary"
             fill="none"
@@ -274,11 +284,16 @@ export default function ContactForm() {
             )}
           </div>
 
+          {/* Cloudflare Turnstile (renders only when configured) */}
+          {TURNSTILE_SITE_KEY ? (
+            <Turnstile siteKey={TURNSTILE_SITE_KEY} onVerify={setTurnstileToken} />
+          ) : null}
+
           {/* Submit Button */}
           <div>
             <button
               type="submit"
-              disabled={pending}
+              disabled={pending || (Boolean(TURNSTILE_SITE_KEY) && !turnstileToken)}
               className="w-full py-3 px-8 text-sm bg-secondary text-white hover:bg-secondary-light rounded-lg transition-colors duration-200 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {pending ? "Sending..." : "Send Message"}

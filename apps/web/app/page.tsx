@@ -71,13 +71,14 @@ export default async function HomePage() {
 
             {/* Right: Kailey's Portrait in Arched Frame */}
             <div className="relative flex items-center justify-center">
-              <Reveal className="relative max-w-xs sm:max-w-md mx-auto opacity-0 translate-y-8 md:-translate-x-8 md:translate-y-0">
+              <Reveal className="relative w-full max-w-xs sm:max-w-md mx-auto opacity-0 translate-y-8 md:-translate-x-8 md:translate-y-0">
                 {/* Arched Portrait Container */}
                 <div className="relative aspect-[3/6] rounded-t-full rounded-b-3xl overflow-hidden shadow-2xl bg-pure-white">
                   <SanityImage
                     image={home.hero.portrait}
                     priority
                     fill
+                    sizes="(max-width: 768px) 80vw, 28rem"
                     className="w-full h-full object-cover object-center"
                   />
                 </div>
@@ -201,6 +202,7 @@ export default async function HomePage() {
                         <SanityImage
                           image={card.image}
                           fill
+                          sizes="(max-width: 768px) 90vw, (max-width: 1024px) 45vw, 30vw"
                           className="rounded-2xl sm:rounded-3xl"
                         />
                       ) : null
@@ -322,6 +324,7 @@ export default async function HomePage() {
                     <SanityImage
                       image={home.team.portrait}
                       fill
+                      sizes="(max-width: 768px) 90vw, 40vw"
                       className="w-full h-full object-cover object-top"
                     />
                   </div>
