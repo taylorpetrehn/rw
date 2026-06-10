@@ -26,10 +26,10 @@ export default async function AatPage() {
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20">
           <div className="max-w-4xl mx-auto text-center">
             <span className="text-5xl sm:text-6xl mb-6 block">{aat.hero.emoji}</span>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-light tracking-wide text-neutral-900 mb-6">
+            <h1 className="text-display-xl font-serif text-neutral-900 mb-6">
               {aat.hero.heading}
             </h1>
-            <p className="text-lg sm:text-xl md:text-2xl text-neutral-600 font-sans font-light leading-relaxed max-w-3xl mx-auto">
+            <p className="text-lead-lg text-neutral-600 font-sans font-light max-w-3xl mx-auto">
               {aat.hero.lead}
             </p>
           </div>
@@ -63,7 +63,7 @@ export default async function AatPage() {
 
             {/* Why Animals */}
             <div className="mb-12 sm:mb-16 md:mb-20">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-light text-neutral-900 mb-6 text-center">
+              <h2 className="text-display-sm font-serif text-neutral-900 mb-6 text-center">
                 {aat.whyAnimals.heading}
               </h2>
               <p className="text-base sm:text-lg text-neutral-600 font-sans font-light leading-relaxed mb-6 text-center">
@@ -83,7 +83,7 @@ export default async function AatPage() {
 
             {/* Meet the Animals */}
             <div className="mb-12 sm:mb-16 md:mb-20 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 border border-primary/10">
-              <h2 className="text-2xl sm:text-3xl font-serif font-light text-neutral-900 mb-4 text-center">
+              <h2 className="text-display-xs font-serif text-neutral-900 mb-4 text-center">
                 {aat.meetAnimals.heading}
               </h2>
               <RichTextRenderer
@@ -94,14 +94,14 @@ export default async function AatPage() {
 
             {/* FAQ Section */}
             <div className="mb-12 sm:mb-16">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-light text-neutral-900 mb-8 text-center">
+              <h2 className="text-display-sm font-serif text-neutral-900 mb-8 text-center">
                 {aat.faq.heading}
               </h2>
 
               <div className="space-y-4 sm:space-y-6">
                 {aat.faq.items.map((item, i) => (
                   <div key={i} className="bg-warm-gray rounded-2xl p-5 sm:p-6 md:p-8">
-                    <h3 className="text-lg sm:text-xl font-serif font-medium text-neutral-900 mb-3">
+                    <h3 className="text-lg sm:text-xl font-serif text-neutral-900 mb-3">
                       {item.question}
                     </h3>
                     <RichTextRenderer

@@ -73,7 +73,7 @@ export function SiteNav({ settings }: SiteNavProps) {
           <div className="flex items-center">
             <Link
               href="/"
-              className="text-3xl sm:text-4xl font-serif font-light tracking-wide text-primary transition-all duration-300"
+              className="text-brand font-serif text-primary transition-all duration-300"
             >
               {settings.brandName}
             </Link>

@@ -38,12 +38,12 @@ export default async function HomePage() {
             {/* Left: Content */}
             <div className="space-y-6 sm:space-y-8 max-w-xl mx-auto md:mx-0 text-center md:text-left">
               <Reveal className="opacity-0 translate-y-8">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-normal tracking-wide text-primary leading-tight mb-4 sm:mb-6">
+                <h1 className="text-display-xl font-serif text-primary mb-4 sm:mb-6">
                   {home.hero.headingLine1}
                   <br />
                   {home.hero.headingLine2}
                 </h1>
-                <p className="text-xs sm:text-sm text-neutral-600 font-light tracking-widest uppercase mb-6 sm:mb-8">
+                <p className="eyebrow font-light text-neutral-600 mb-6 sm:mb-8">
                   {home.hero.subLabel}
                 </p>
               </Reveal>
@@ -51,7 +51,7 @@ export default async function HomePage() {
               <Reveal className="w-12 sm:w-16 h-px bg-primary/20 opacity-0 translate-y-8 mx-auto md:mx-0" />
 
               <Reveal className="opacity-0 translate-y-8">
-                <p className="text-base sm:text-lg md:text-xl text-neutral-700 font-light leading-relaxed mb-6 sm:mb-8">
+                <p className="text-lead text-neutral-700 font-light mb-6 sm:mb-8">
                   {home.hero.lead}
                 </p>
                 <p className="text-sm sm:text-base text-neutral-600 font-light leading-relaxed mb-6 sm:mb-8">
@@ -97,12 +97,12 @@ export default async function HomePage() {
           {/* Section Header */}
           <div className="text-center mb-12 sm:mb-16 md:mb-20 lg:mb-24 max-w-4xl mx-auto">
             <Reveal className="opacity-0 translate-y-8">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif font-light tracking-wide text-neutral-900 mb-4 sm:mb-6 md:mb-8">
+              <h2 className="text-display-lg font-serif text-neutral-900 mb-4 sm:mb-6 md:mb-8">
                 {home.approach.heading}
               </h2>
             </Reveal>
             <Reveal className="opacity-0 translate-y-8">
-              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-neutral-600 font-light leading-relaxed mb-4 sm:mb-6 md:mb-8">
+              <p className="text-lead-lg text-neutral-600 font-light mb-4 sm:mb-6 md:mb-8">
                 {home.approach.intro}
               </p>
             </Reveal>
@@ -122,11 +122,11 @@ export default async function HomePage() {
                       <div className="bg-pure-white rounded-2xl sm:rounded-3xl shadow-lg group-hover:shadow-xl transition-all duration-500 p-6 sm:p-8 h-full">
                         <div className="space-y-4 sm:space-y-5">
                           <div className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-secondary/20 rounded-full">
-                            <span className="text-xs font-sans font-medium text-secondary tracking-wider uppercase">
+                            <span className="eyebrow font-medium text-secondary">
                               {card.badge}
                             </span>
                           </div>
-                          <h3 className="text-2xl sm:text-3xl font-serif font-light text-primary leading-tight">
+                          <h3 className="text-display-xs font-serif text-primary">
                             {card.title}
                           </h3>
                           <p className="text-sm sm:text-base text-primary font-sans font-light leading-relaxed">
@@ -177,11 +177,11 @@ export default async function HomePage() {
                     front={
                       <div className="space-y-4 sm:space-y-5">
                         <div className={`inline-block px-3 sm:px-4 py-1.5 sm:py-2 ${accentBadgeBg} rounded-full`}>
-                          <span className={`text-xs font-sans font-medium ${accentLabel} tracking-wider uppercase`}>
+                          <span className={`eyebrow font-medium ${accentLabel}`}>
                             {card.badge}
                           </span>
                         </div>
-                        <h3 className="text-2xl sm:text-3xl font-serif font-light text-primary leading-tight">
+                        <h3 className="text-display-xs font-serif text-primary">
                           {card.title}
                         </h3>
                         <p className="text-sm sm:text-base text-primary font-sans font-light leading-relaxed">
@@ -222,12 +222,12 @@ export default async function HomePage() {
             {/* Section Header */}
             <div className="text-center mb-12 sm:mb-16 md:mb-20">
               <Reveal className="opacity-0 translate-y-8">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif font-light tracking-wide text-neutral-900 mb-6 sm:mb-8">
+                <h2 className="text-display-lg font-serif text-neutral-900 mb-6 sm:mb-8">
                   {home.philosophy.heading}
                 </h2>
               </Reveal>
               <Reveal className="opacity-0 translate-y-8">
-                <p className="text-base sm:text-lg md:text-xl text-neutral-600 font-sans font-light leading-relaxed max-w-3xl mx-auto">
+                <p className="text-lead text-neutral-600 font-sans font-light max-w-3xl mx-auto">
                   {home.philosophy.intro}
                 </p>
               </Reveal>
@@ -239,11 +239,11 @@ export default async function HomePage() {
               <Reveal className="md:col-span-2 lg:row-span-2 bg-pure-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 lg:p-12 shadow-lg hover:shadow-xl transition-all duration-500 opacity-0 translate-y-8">
                 <div className="space-y-4 sm:space-y-6">
                   <div className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-primary/10 rounded-full">
-                    <span className="text-xs font-sans font-medium text-primary tracking-widest uppercase">
+                    <span className="eyebrow font-medium text-primary">
                       {home.philosophy.feature.badge}
                     </span>
                   </div>
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-serif font-light text-neutral-900 leading-tight">
+                  <h3 className="text-display-sm font-serif text-neutral-900">
                     {home.philosophy.feature.title}
                   </h3>
                   {home.philosophy.feature.paragraphs.map((paragraph, i) => (
@@ -272,7 +272,7 @@ export default async function HomePage() {
                   key={smallCard.title}
                   className="bg-pure-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-500 opacity-0 translate-y-8"
                 >
-                  <h3 className="text-lg sm:text-xl font-serif font-medium text-neutral-900 mb-3 sm:mb-4">
+                  <h3 className="text-lg sm:text-xl font-serif text-neutral-900 mb-3 sm:mb-4">
                     {smallCard.title}
                   </h3>
                   <p
@@ -289,7 +289,7 @@ export default async function HomePage() {
 
               {/* Goal Statement - Spans 2 columns */}
               <Reveal className="md:col-span-2 bg-pure-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 text-neutral-900 shadow-lg hover:shadow-xl transition-all duration-500 opacity-0 translate-y-8">
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-serif font-light mb-3 sm:mb-4">
+                <h3 className="text-display-xs font-serif mb-3 sm:mb-4">
                   {home.philosophy.goalTitle}
                 </h3>
                 <p className="text-base sm:text-lg font-sans font-light leading-relaxed opacity-95">
@@ -307,7 +307,7 @@ export default async function HomePage() {
           {/* Section Header */}
           <div className="text-center mb-10 sm:mb-12 md:mb-16 lg:mb-20 max-w-4xl mx-auto">
             <Reveal className="opacity-0 translate-y-8">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif font-light tracking-wide text-neutral-900 mb-5 sm:mb-6 md:mb-8">
+              <h2 className="text-display-lg font-serif text-neutral-900 mb-5 sm:mb-6 md:mb-8">
                 {home.team.heading}
               </h2>
             </Reveal>
@@ -344,13 +344,13 @@ export default async function HomePage() {
               <Reveal className="md:col-span-7 lg:col-span-7 space-y-4 sm:space-y-5 md:space-y-6 opacity-0 translate-y-8 md:-translate-x-8 md:translate-y-0 text-center md:text-left md:pl-8 lg:pl-12 xl:pl-16 self-start md:self-center">
                 {/* Name & Title */}
                 <div className="space-y-1.5 sm:space-y-2 md:space-y-3">
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-light text-neutral-900 leading-tight">
+                  <h3 className="text-display-md font-serif text-neutral-900">
                     {home.team.name}
                   </h3>
-                  <p className="text-base sm:text-lg md:text-xl text-primary font-sans font-light">
+                  <p className="text-lead text-primary font-sans font-light">
                     {home.team.title}
                   </p>
-                  <p className="text-xs sm:text-sm text-neutral-500 font-sans font-light tracking-wider uppercase">
+                  <p className="eyebrow font-light text-neutral-500">
                     {home.team.credentialLine}
                   </p>
                 </div>
@@ -366,7 +366,7 @@ export default async function HomePage() {
 
                 {/* Areas of Expertise - Elegant Pills */}
                 <div className="pt-3 sm:pt-4 md:pt-6">
-                  <h4 className="text-xs sm:text-sm font-sans font-medium text-neutral-800 mb-3 sm:mb-4 tracking-widest uppercase">
+                  <h4 className="eyebrow font-medium text-neutral-800 mb-3 sm:mb-4">
                     Areas of Expertise
                   </h4>
                   <div className="flex flex-wrap gap-2 justify-center md:justify-start mb-4">
@@ -380,7 +380,7 @@ export default async function HomePage() {
                     ))}
                   </div>
 
-                  <h4 className="text-xs sm:text-sm font-sans font-medium text-neutral-800 mb-3 sm:mb-4 tracking-widest uppercase">
+                  <h4 className="eyebrow font-medium text-neutral-800 mb-3 sm:mb-4">
                     Special Interests
                   </h4>
                   <div className="flex flex-wrap gap-2 justify-center md:justify-start">
@@ -417,7 +417,7 @@ export default async function HomePage() {
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-10 sm:mb-12 md:mb-16">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif font-light tracking-wide text-neutral-900 mb-4 sm:mb-6 md:mb-8">
+              <h2 className="text-display-lg font-serif text-neutral-900 mb-4 sm:mb-6 md:mb-8">
                 {home.faq.heading}
               </h2>
             </div>
@@ -431,7 +431,7 @@ export default async function HomePage() {
                   }`}
                 >
                   <div className="space-y-4 sm:space-y-5">
-                    <h3 className="text-2xl sm:text-3xl font-serif font-light text-primary leading-tight">
+                    <h3 className="text-display-xs font-serif text-primary">
                       {item.question}
                     </h3>
                     <RichTextRenderer

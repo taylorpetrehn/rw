@@ -16,7 +16,7 @@ export default async function PrivacyPage() {
     <section className="py-16 sm:py-24 bg-warm-gray min-h-screen">
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-4xl sm:text-5xl font-serif font-light text-primary mb-8">
+          <h1 className="text-4xl sm:text-5xl font-serif text-primary mb-8">
             {page.title}
           </h1>
           <RichTextRenderer

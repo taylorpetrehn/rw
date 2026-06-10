@@ -44,6 +44,15 @@ else typed fallback content. Pages map fields → JSX; **page structure/classes*
 
 - Tailwind v4 `@theme` — colors/fonts ported 1:1 from the Rails app. Primary `#2E4B3C`
   (forest), secondary `#F0531C` (orange), `warm-gray` `#F7EDDA` (cream bg).
+- **Fluid type scale** — headings use semantic tokens (`text-display-xl/lg/md/sm/xs`,
+  `text-brand`, `text-lead`, `text-lead-lg`) defined in `@theme`; each clamp()s between a
+  390px and 1280px viewport and carries its own line-height/weight/tracking. Don't re-derive
+  per-breakpoint stacks (`text-3xl sm:text-4xl …`) — use (or extend) the scale. The small
+  uppercase label voice is the `eyebrow` utility (pair it with `font-light`/`font-medium`).
+- Birdie ships a **single weight (400)** — `font-light`/`font-medium` on serif/display text
+  is a silent no-op (browsers don't synthesize sub-bold weights). Weight is pinned in the
+  display tokens; don't add weight classes to Birdie text.
+- Base layer sets `text-wrap: balance` on h1–h4 and `text-wrap: pretty` on body copy.
 - `Birdie` = self-hosted display/serif/body via `next/font/local` (`app/fonts/`).
 - `degular-variable` = sans, via Adobe Typekit kit `otn8yfj` (`<link>` in `layout.tsx`). The
   kit is domain-allowlisted (works on rewildingspeech.com; may fall back on random domains).
