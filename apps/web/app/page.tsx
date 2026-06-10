@@ -62,7 +62,7 @@ export default async function HomePage() {
               <Reveal className="opacity-0 translate-y-8">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center bg-secondary text-pure-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium text-xs sm:text-sm tracking-wider hover:bg-secondary-light transition-all duration-300 shadow-lg hover:shadow-xl"
+                  className="inline-flex items-center bg-secondary text-pure-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium text-xs sm:text-sm tracking-wider hover:bg-secondary-dark transition-all duration-300 shadow-lg hover:shadow-xl"
                 >
                   {home.hero.cta.label}
                 </Link>
@@ -122,7 +122,7 @@ export default async function HomePage() {
                       <div className="bg-pure-white rounded-2xl sm:rounded-3xl shadow-lg group-hover:shadow-xl transition-all duration-500 p-6 sm:p-8 h-full">
                         <div className="space-y-4 sm:space-y-5">
                           <div className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-secondary/20 rounded-full">
-                            <span className="eyebrow font-medium text-secondary">
+                            <span className="eyebrow font-medium text-secondary-ink">
                               {card.badge}
                             </span>
                           </div>
@@ -140,7 +140,7 @@ export default async function HomePage() {
                               </li>
                             ))}
                           </ul>
-                          <div className="pt-2 flex items-center text-secondary font-sans text-sm font-medium group-hover:translate-x-1 transition-transform">
+                          <div className="pt-2 flex items-center text-secondary-ink font-sans text-sm font-medium group-hover:translate-x-1 transition-transform">
                             {card.linkLabel}
                             <svg
                               className="w-4 h-4 ml-1"
@@ -164,7 +164,7 @@ export default async function HomePage() {
               }
 
               const accentBadgeBg = card.accent === "secondary" ? "bg-secondary/20" : "bg-primary/20";
-              const accentLabel = card.accent === "secondary" ? "text-secondary" : "text-primary";
+              const accentLabel = card.accent === "secondary" ? "text-secondary-ink" : "text-primary";
               const accentIcon = card.accent === "secondary" ? "text-secondary" : "text-primary";
 
               return (

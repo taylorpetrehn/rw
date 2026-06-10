@@ -118,7 +118,7 @@ export default async function AatPage() {
             <div className="text-center">
               <Link
                 href="/contact"
-                className="inline-flex items-center bg-secondary text-pure-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium text-sm tracking-wider hover:bg-secondary-light transition-all duration-300 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center bg-secondary text-pure-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium text-sm tracking-wider hover:bg-secondary-dark transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 {aat.cta.label}
               </Link>

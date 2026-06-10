@@ -13,56 +13,57 @@
   --font-serif: var(--font-birdie), Georgia, serif;
   --font-sans: "degular-variable", Inter, system-ui, -apple-system, sans-serif;
 
-  /* Primary color palette - Forest greens */
+  /* --------------------------------------------------------------------------
+     Color system — every value below is used, and every text/surface pairing
+     was contrast-audited (WCAG 2.1). Ratios worth knowing:
+       primary on warm-gray 8.26 · primary on white 9.60 (AA/AAA)
+       white on secondary 3.52 (large-text only — display/CTA use)
+       white on secondary-dark 5.22 (AA — the hover + small-text-safe orange)
+       secondary-ink on white 5.79 (AA — orange for small labels/links)
+       neutral-500 on white 5.39, on warm-gray 4.64 (AA)
+     Unused tokens from the Rails port (accent-*, green-primary, soft-gray,
+     warm-white, warm-gray-light, primary-lighter/dark/darker, secondary-light,
+     secondary-lighter, redundant spacing/radius/shadow values) were pruned —
+     a token here is a decision, not an inventory.
+  -------------------------------------------------------------------------- */
+
+  /* Primary palette - Forest greens */
   --color-primary: #2e4b3c;
   --color-primary-light: #4a8070;
-  --color-primary-lighter: #6a9d8f;
-  --color-primary-dark: #09332c;
-  --color-primary-darker: #051f1a;
 
-  /* Secondary color palette - Warm oranges */
+  /* Secondary palette - Warm oranges.
+     `secondary` is the brand orange for fills and large display accents.
+     `secondary-dark` is the hover/pressed state (white text stays legible).
+     `secondary-ink` is the orange for SMALL text on light surfaces (badges,
+     inline links) — same hue family, 4.5:1+ where #f0531c only reached 3.5:1. */
   --color-secondary: #f0531c;
-  --color-secondary-light: #ffa74f;
-  --color-secondary-lighter: #ffd4a3;
   --color-secondary-dark: #c43d0f;
+  --color-secondary-ink: #b8390e;
 
-  /* Neutral colors - Warm tones */
-  --color-soft-gray: #f7f7f7;
-  --color-warm-white: #fefefe;
+  /* Neutral ramp - warm throughout.
+     100–300 were already warm creams, but 400/500 previously fell through to
+     Tailwind's cool defaults — the one cold note in a warm palette (visible in
+     form placeholders and muted captions). 400/500 are now warm stone grays
+     harmonized with the creams; 600–900 match the values the site shipped with. */
   --color-pure-white: #ffffff;
   --color-warm-gray: #f7edda;
-  --color-warm-gray-light: #faf5eb;
-  --color-neutral-50: #fafafa;
   --color-neutral-100: #f7edda;
   --color-neutral-200: #f0e4c9;
   --color-neutral-300: #e6d8b8;
+  --color-neutral-400: #9c9485;
+  --color-neutral-500: #6f6a5e;
   --color-neutral-600: #525252;
   --color-neutral-700: #404040;
   --color-neutral-800: #262626;
   --color-neutral-900: #171717;
 
-  /* Accent colors */
-  --color-accent-green: #10b981;
-  --color-accent-orange: #f97316;
-  --color-accent-blue: #e0f2f1;
-  --color-green-primary: #2e4b3c;
-
-  /* Custom spacing */
-  --spacing-18: 4.5rem;
-  --spacing-72: 18rem;
-  --spacing-84: 21rem;
-  --spacing-96: 24rem;
-
-  /* Custom border radius */
+  /* Custom border radius (used by cards site-wide) */
   --radius-2xl: 1rem;
   --radius-3xl: 1.5rem;
-  --radius-4xl: 2rem;
-  --radius-5xl: 3rem;
 
   /* Custom shadows */
   --shadow-soft: 0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04);
   --shadow-soft-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
-  --shadow-inner-soft: inset 0 2px 4px 0 rgba(0, 0, 0, 0.03);
 
   /* --------------------------------------------------------------------------
      Fluid type scale — the display voices used across the site.
@@ -138,6 +139,34 @@
   font-size: clamp(0.75rem, 0.72rem + 0.11vw, 0.8125rem);
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+/* ----------------------------------------------------------------------------
+   Interaction states — one intentional answer for focus, selection, taps
+---------------------------------------------------------------------------- */
+@layer base {
+  html {
+    color-scheme: light;
+  }
+
+  body {
+    -webkit-tap-highlight-color: transparent;
+    accent-color: var(--color-primary);
+  }
+
+  /* Brand-colored text selection instead of browser default blue. */
+  ::selection {
+    background-color: var(--color-primary);
+    color: var(--color-warm-gray);
+  }
+
+  /* Keyboard focus is a first-class state: a forest ring on every focusable
+     element, offset so it reads on any surface. Mouse/touch users never see
+     it (:focus-visible), so nothing changes visually for pointer users. */
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
 }
 
 /* ----------------------------------------------------------------------------
