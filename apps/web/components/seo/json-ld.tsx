@@ -1,53 +1,15 @@
-import { getSiteSettings } from "@rw/sanity";
+import type { SchemaNode } from "@/lib/structured-data";
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://rewildingspeech.com";
+interface JsonLdProps {
+  schema: SchemaNode;
+}
 
 /**
- * MedicalBusiness JSON-LD for local SEO. Server component — fetches site
- * settings for address and service areas, renders a schema.org <script>.
+ * Render a schema.org node as an application/ld+json <script>. Builders live
+ * in `lib/structured-data.ts` — pages compose the nodes they need (entity
+ * graph, FAQPage, breadcrumbs) and render one <JsonLd> per node.
  */
-export async function JsonLd() {
-  const settings = await getSiteSettings();
-  const address = settings.address ?? {};
-
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "MedicalBusiness",
-    name: "Rewilding Speech Therapy",
-    description:
-      "Private speech therapy practice specializing in AAC and Gestalt Language Processing with a neurodiversity-affirming approach",
-    url: siteUrl,
-    telephone: settings.contactPhone ?? "",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: address.locality ?? "Lawrence",
-      addressRegion: address.region ?? "KS",
-      addressCountry: address.country ?? "US",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: "38.9717",
-      longitude: "-95.2353",
-    },
-    areaServed: settings.serviceAreas.map((city) => ({
-      "@type": "City",
-      name: city,
-      address: {
-        "@type": "PostalAddress",
-        addressRegion: address.region ?? "KS",
-      },
-    })),
-    medicalSpecialty: "Speech-Language Pathology",
-    serviceType: [
-      "AAC (Augmentative and Alternative Communication)",
-      "Gestalt Language Processing",
-      "Nature-Based Therapy",
-      "Parent Coaching",
-      "Neurodiversity-Affirming Therapy",
-    ],
-  };
-
+export function JsonLd({ schema }: JsonLdProps) {
   // Escape <, >, & so a Sanity-sourced value (e.g. containing "</script>")
   // can't break out of the <script> tag and inject markup.
   const json = JSON.stringify(schema)

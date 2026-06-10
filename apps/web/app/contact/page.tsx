@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import ContactForm from "./contact-form";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Contact",
   description:
     "Get in touch with Rewilding Speech Therapy. Interested in our services? We'd love to hear from you.",
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

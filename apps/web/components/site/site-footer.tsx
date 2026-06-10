@@ -72,7 +72,7 @@ export function SiteFooter({ settings }: SiteFooterProps) {
               href={settings.primaryCta.href}
               className="inline-flex items-center bg-primary text-white px-5 sm:px-6 py-2 sm:py-2.5 rounded-full font-sans font-medium text-xs tracking-wider hover:bg-primary-light transition-all duration-300 shadow-sm hover:shadow-md"
             >
-              Get Started
+              {settings.primaryCta.label}
             </Link>
           </div>
 

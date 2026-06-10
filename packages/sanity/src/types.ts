@@ -57,6 +57,7 @@ export interface HeroSection {
   lead: string; // "Where communication grows naturally—..."
   serviceArea: string; // "Serving families in Lawrence, Topeka..."
   cta: CtaLink; // "Get in touch" -> /contact
+  secondaryCta?: CtaLink; // "Explore our approach" -> /#approach (optional)
   portrait: SanityImageRef; // kailey.jpg
 }
 

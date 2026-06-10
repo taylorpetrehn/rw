@@ -3,17 +3,21 @@ import Link from "next/link";
 import { getAat } from "@rw/sanity";
 import { SanityImage } from "@/components/ui/sanity-image";
 import { RichTextRenderer } from "@/components/ui/portable-text";
+import { JsonLd } from "@/components/seo/json-ld";
+import { buildBreadcrumbSchema, buildFaqSchema } from "@/lib/structured-data";
+import { buildMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   const aat = await getAat();
-  return {
+  return buildMetadata({
     title: "Animal-Assisted Therapy",
     description:
       aat.seo?.description ??
       "Animal-assisted therapy at Rewilding Speech supports natural, meaningful communication through connection with our therapy animals.",
-  };
+    path: "/aat",
+  });
 }
 
 export default async function AatPage() {
@@ -21,6 +25,13 @@ export default async function AatPage() {
 
   return (
     <>
+      <JsonLd schema={buildFaqSchema(aat.faq.items)} />
+      <JsonLd
+        schema={buildBreadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: aat.hero.heading, path: "/aat" },
+        ])}
+      />
       {/* AAT Hero Section */}
       <section className="relative py-16 sm:py-20 md:py-24 lg:py-32 bg-warm-gray">
         <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20">

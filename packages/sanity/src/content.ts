@@ -95,6 +95,7 @@ export const homeContent: HomeContent = {
     serviceArea:
       "Serving families in Lawrence, Topeka, and the surrounding Kansas communities.",
     cta: { label: "Get in touch", href: "/contact" },
+    secondaryCta: { label: "Explore our approach", href: "/#approach" },
     portrait: {
       src: "/images/kailey.jpg",
       alt: "Kailey Petrehn, Speech-Language Pathologist",
