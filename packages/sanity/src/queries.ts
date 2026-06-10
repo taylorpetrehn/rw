@@ -66,6 +66,7 @@ export const homeQuery = /* groq */ `
     lead,
     serviceArea,
     cta{ ${ctaFields} },
+    secondaryCta{ ${ctaFields} },
     portrait{ ${imageFields} }
   },
   approach{

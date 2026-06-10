@@ -18,7 +18,11 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description: seo.description,
     keywords: seo.keywords,
-    alternates: { canonical: "/" },
+    // NOTE: no `alternates.canonical` here — a canonical set in the root
+    // layout is inherited by every page that doesn't override it, silently
+    // canonicalizing /aat, /contact, etc. to "/". Each page sets its own
+    // (lib/seo.ts#buildMetadata). OG/Twitter images come from the generated
+    // app/opengraph-image.tsx (1200×630), not a hardcoded portrait.
     openGraph: {
       type: "website",
       url: siteUrl,
@@ -26,13 +30,11 @@ export async function generateMetadata(): Promise<Metadata> {
       title: seo.title,
       description: seo.description,
       locale: "en_US",
-      images: [{ url: "/images/kailey.jpg", width: 1333, height: 2000, alt: "Kailey Petrehn, Speech-Language Pathologist" }],
     },
     twitter: {
       card: "summary_large_image",
       title: seo.title,
       description: seo.description,
-      images: ["/images/kailey.jpg"],
     },
     icons: {
       icon: [
@@ -67,8 +69,14 @@ export default async function RootLayout({
         </noscript>
       </head>
       <body className="bg-warm-gray font-body text-neutral-900 antialiased">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-primary focus:text-warm-gray focus:px-5 focus:py-2.5 focus:rounded-full focus:text-sm font-sans"
+        >
+          Skip to content
+        </a>
         <SiteNav settings={settings} />
-        <main className="pt-16 sm:pt-20 md:pt-24 min-h-screen">{children}</main>
+        <main id="main" className="pt-16 sm:pt-20 md:pt-24 min-h-screen">{children}</main>
         <SiteFooter settings={settings} />
       </body>
     </html>

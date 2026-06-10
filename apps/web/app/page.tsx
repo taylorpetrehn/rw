@@ -7,6 +7,7 @@ import { SanityImage } from "@/components/ui/sanity-image";
 import { CheckIcon } from "@/components/ui/check-icon";
 import { RichTextRenderer } from "@/components/ui/portable-text";
 import { JsonLd } from "@/components/seo/json-ld";
+import { buildBusinessGraph, buildFaqSchema } from "@/lib/structured-data";
 
 export const revalidate = 60;
 
@@ -22,11 +23,12 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
-  const home = await getHome();
+  const [home, settings] = await Promise.all([getHome(), getSiteSettings()]);
 
   return (
     <>
-      <JsonLd />
+      <JsonLd schema={buildBusinessGraph(settings, home)} />
+      <JsonLd schema={buildFaqSchema(home.faq.items)} />
 
       {/* Hero Section - Emmeline Style */}
       <section
@@ -60,12 +62,22 @@ export default async function HomePage() {
               </Reveal>
 
               <Reveal delay={250}>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center bg-secondary text-pure-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium text-xs sm:text-sm tracking-wider hover:bg-secondary-dark transition-all duration-300 shadow-lg hover:shadow-xl"
-                >
-                  {home.hero.cta.label}
-                </Link>
+                <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 sm:gap-4">
+                  <Link
+                    href={home.hero.cta.href}
+                    className="inline-flex items-center bg-secondary text-pure-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium text-xs sm:text-sm tracking-wider hover:bg-secondary-dark transition-all duration-300 shadow-lg hover:shadow-xl"
+                  >
+                    {home.hero.cta.label}
+                  </Link>
+                  {home.hero.secondaryCta ? (
+                    <Link
+                      href={home.hero.secondaryCta.href}
+                      className="inline-flex items-center border border-primary/30 text-primary px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium text-xs sm:text-sm tracking-wider hover:border-primary hover:bg-primary/5 transition-all duration-300"
+                    >
+                      {home.hero.secondaryCta.label}
+                    </Link>
+                  ) : null}
+                </div>
               </Reveal>
             </div>
 

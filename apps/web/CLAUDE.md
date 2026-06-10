@@ -13,8 +13,21 @@ app/privacy, app/terms    Legal pages (content from Sanity legalPage docs)
 app/api/contact/route.ts  POST endpoint → validates → anti-bot → sends via Resend
 app/studio/[[...tool]]    Embedded Sanity Studio (config: apps/web/sanity.config.ts)
 app/sitemap.ts, robots.ts, manifest.ts   SEO infra
-app/layout.tsx            Root layout: fonts, Typekit <link>, SiteNav + SiteFooter, metadata
+app/opengraph-image.tsx   Generated 1200×630 brand OG card (Birdie via satori; WOFF not WOFF2)
+app/layout.tsx            Root layout: fonts, Typekit <link>, skip link, SiteNav + SiteFooter, metadata
 ```
+
+## SEO conventions
+
+- **Canonicals are per-page**, never in the root layout (layout metadata is inherited, so a
+  layout canonical silently points every page at "/"). Pages build metadata through
+  `lib/seo.ts#buildMetadata({ title, description, path })`; the home page owns its absolute
+  title and sets `canonical: "/"` itself.
+- **Structured data**: builders in `lib/structured-data.ts` (entity `@graph` of
+  MedicalBusiness + Person + WebSite with stable `@id`s, `buildFaqSchema`,
+  `buildBreadcrumbSchema`); rendered with the generic `<JsonLd schema={…}>`. FAQ rich results
+  are retired by Google, but FAQPage markup feeds entity understanding and AI-search answers.
+- Plain text for schema answers comes from `richTextToPlainText` (`@rw/sanity`).
 
 ## Content flow
 
@@ -43,7 +56,8 @@ else typed fallback content. Pages map fields → JSX; **page structure/classes*
   bullets use `<CheckIcon>` markers (Tailwind preflight strips default list markers).
 - `site/site-nav.tsx` (client), `site/site-footer.tsx` — shared chrome (in the layout).
 - `ui/turnstile.tsx` (client) — Cloudflare Turnstile widget (renders only if site key set).
-- `seo/json-ld.tsx` — MedicalBusiness JSON-LD (uses `dangerouslySetInnerHTML` with JSON.stringify).
+- `seo/json-ld.tsx` — generic `<JsonLd schema>` renderer (escaped `dangerouslySetInnerHTML`);
+  schema builders live in `lib/structured-data.ts`.
 
 ## Theme & fonts (`app/globals.css`, `app/fonts.ts`)
 

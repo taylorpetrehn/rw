@@ -1,12 +1,19 @@
 import type { Metadata } from "next";
 import { getLegal } from "@rw/sanity";
 import { RichTextRenderer } from "@/components/ui/portable-text";
+import { buildMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getLegal("terms");
-  return { title: page.title };
+  return buildMetadata({
+    title: page.title,
+    description:
+      page.seo?.description ??
+      "The terms governing use of the Rewilding Speech Therapy website.",
+    path: "/terms",
+  });
 }
 
 export default async function TermsPage() {

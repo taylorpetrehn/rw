@@ -15,6 +15,11 @@ export const heroSection = defineType({
     defineField({ name: "lead", type: "text", rows: 2, validation: (R) => R.required() }),
     defineField({ name: "serviceArea", type: "text", rows: 2, validation: (R) => R.required() }),
     defineField({ name: "cta", type: "cta", validation: (R) => R.required() }),
+    defineField({
+      name: "secondaryCta",
+      title: "Secondary CTA (optional)",
+      type: "cta",
+    }),
     defineField({ name: "portrait", type: "altImage", validation: (R) => R.required() }),
   ],
 });
