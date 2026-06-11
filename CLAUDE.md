@@ -41,6 +41,13 @@ The site renders fully from **typed fallback content** when Sanity env vars are 
 - All content flows through the types in `packages/sanity/src/types.ts` (the contract).
 - Secrets come from **env only** — never commit them. Public values are fine to commit
   (Sanity `projectId`/`dataset`, `NEXT_PUBLIC_*`). Only `.env.example` is tracked.
+- **Secret values live in 1Password** (vault `Rewilding-Dev`, item `Web Environment` —
+  RW is the current Rewilding iteration and owns the `Rewilding-*` stage vaults; the
+  legacy `rewilding-*` Rails repos share them). Local injection goes through the `opr`
+  wrapper against the committed reference file: `opr run --env-file=op.env -- pnpm dev`
+  (`op.env` holds `op://` references, no values — safe to commit; bare `op` has no
+  token by design). Production values are Vercel project env vars; keep 1Password as
+  the source of truth and sync via `vercel env`.
 - Match the existing code style; the Tailwind theme/classes are ported 1:1 from the original
   Rails app — don't redesign, preserve the aesthetic.
 
