@@ -8,6 +8,7 @@
  * createOrReplace()s the five documents with fixed _ids, replacing every
  * { src, alt } image reference with a Sanity image reference.
  */
+import { createHash } from "node:crypto";
 import { createReadStream } from "node:fs";
 import { basename, resolve } from "node:path";
 
@@ -91,6 +92,42 @@ async function toSanityImage(ref: SanityImageRef): Promise<SanityImageValue> {
   };
 }
 
+/**
+ * Sanity requires a unique `_key` on every object that is a direct member of an
+ * array (cards, FAQ items, etc.). Our typed content omits these, so Studio warns
+ * "Some items in the list are missing their keys." Walk the document and stamp a
+ * stable `_key` (derived from the item's position + contents) onto any keyless
+ * array-of-object member, leaving existing keys (e.g. Portable Text blocks) and
+ * primitive arrays (strings) untouched.
+ */
+function withKeys<T>(value: T, path = "$"): T {
+  if (Array.isArray(value)) {
+    return value.map((item, i) => {
+      const keyed = withKeys(item, `${path}[${i}]`);
+      if (
+        keyed &&
+        typeof keyed === "object" &&
+        !Array.isArray(keyed) &&
+        typeof (keyed as Record<string, unknown>)._key !== "string"
+      ) {
+        (keyed as Record<string, unknown>)._key = createHash("sha1")
+          .update(`${path}[${i}]:${JSON.stringify(item)}`)
+          .digest("hex")
+          .slice(0, 12);
+      }
+      return keyed;
+    }) as T;
+  }
+  if (value && typeof value === "object") {
+    const out: Record<string, unknown> = {};
+    for (const [k, v] of Object.entries(value as Record<string, unknown>)) {
+      out[k] = withKeys(v, `${path}.${k}`);
+    }
+    return out as T;
+  }
+  return value;
+}
+
 async function main() {
   console.log(`Seeding Sanity project "${projectId}" dataset "${dataset}"...`);
 
@@ -153,7 +190,7 @@ async function main() {
 
   for (const doc of documents) {
     console.log(`Writing document: ${doc._id} (${doc._type})`);
-    await client.createOrReplace(doc);
+    await client.createOrReplace(withKeys(doc));
   }
 
   console.log("Seed complete.");
